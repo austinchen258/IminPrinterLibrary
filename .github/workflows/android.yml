@@ -36,17 +36,20 @@ jobs:
       - name: Build APK
         run: ./gradlew assembleRelease
 
-      - name: Build AAB
-        run: ./gradlew bundleRelease
+      - name: List build outputs
+        run: ls -R app/build/outputs/apk/
 
       - name: Upload APK as artifact
         uses: actions/upload-artifact@v4
         with:
           name: app-release.apk
-          path: app/build/outputs/apk/release/app-release.apk
+          path: app/build/outputs/apk/release/app-release.apk  # 根据实际路径更新
+
+      - name: Build AAB
+        run: ./gradlew bundleRelease
 
       - name: Upload AAB as artifact
         uses: actions/upload-artifact@v4
         with:
           name: app-release.aab
-          path: app/build/outputs/bundle/release/app-release.aab
+          path: app/build/outputs/bundle/release/app-release.aab  # 根据实际路径更新
