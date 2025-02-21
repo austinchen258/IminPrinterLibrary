@@ -34,7 +34,7 @@ jobs:
             ${{ runner.os }}-gradle-
 
       - name: Build APK
-        run: ./gradlew assembleRelease
+        run: ./gradlew assembleDebug
 
       - name: List build outputs
         run: ls -R app/build/outputs/apk/
