@@ -12,6 +12,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew  # 添加执行权限
       - name: Set up JDK 17
         uses: actions/setup-java@v3
         with:
@@ -29,12 +31,12 @@ jobs:
       - name: Build AAB
         run: ./gradlew bundleRelease
       - name: Upload APK as artifact
-        uses: actions/upload-artifact@v4  # 使用 v4
+        uses: actions/upload-artifact@v4
         with:
           name: app-release.apk
           path: app/build/outputs/apk/release/app-release.apk
       - name: Upload AAB as artifact
-        uses: actions/upload-artifact@v4  # 使用 v4
+        uses: actions/upload-artifact@v4
         with:
           name: app-release.aab
           path: app/build/outputs/bundle/release/app-release.aab
