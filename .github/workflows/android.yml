@@ -2,16 +2,16 @@ name: Android CI
 on:
   push:
     branches:
-      - main  # 监听 main 分支的代码推送
+      - main
   pull_request:
     branches:
-      - main  # 监听 main 分支的 PR
+      - main
 jobs:
   build:
-    runs-on: ubuntu-latest  # 使用 Ubuntu 最新的运行环境
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3  # 拉取代码
+        uses: actions/checkout@v3
       - name: Set up JDK 17
         uses: actions/setup-java@v3
         with:
@@ -25,16 +25,16 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-gradle-
       - name: Build APK
-        run: ./gradlew assembleRelease  # 构建 Release APK
+        run: ./gradlew assembleRelease
       - name: Build AAB
-        run: ./gradlew bundleRelease  # 构建 Release AAB
+        run: ./gradlew bundleRelease
       - name: Upload APK as artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4  # 使用 v4
         with:
           name: app-release.apk
-          path: app/build/outputs/apk/release/app-release.apk  # APK 路径
+          path: app/build/outputs/apk/release/app-release.apk
       - name: Upload AAB as artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4  # 使用 v4
         with:
           name: app-release.aab
-          path: app/build/outputs/bundle/release/app-release.aab  # AAB 路径
+          path: app/build/outputs/bundle/release/app-release.aab
